@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var melee_timer: Timer = $Arm/Melee_timer
 @onready var melee_col: Area2D = $Arm/Melee_Col
 
-@export var speed = 150.0
+@export var speed = 100.0
 @export var knockback = 30.0
 
 var attacking = false
@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("Left","Right","Up","Down")
 	velocity = direction * speed
 	
-	camera.offset = camera.offset.move_toward((direction * 10),delta * 50.0)
+	camera.offset = camera.offset.move_toward((direction * 5),delta * 50.0)
 	
 	if direction:
 		sprite.play("Walk")

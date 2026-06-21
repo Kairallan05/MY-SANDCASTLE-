@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvkt7vmbmevty"
-path="res://.godot/imported/SandCastle.png-7a5ad0a891c66fe93c90da2c96e98ab1.ctex"
+uid="uid://bpn2ifk5gbf04"
+path="res://.godot/imported/SandTower.png-0d9fa01e019df89d37f87911e99f1331.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Background_Tiles/SandCastle.png"
-dest_files=["res://.godot/imported/SandCastle.png-7a5ad0a891c66fe93c90da2c96e98ab1.ctex"]
+source_file="res://Assets/Background_Tiles/SandTower.png"
+dest_files=["res://.godot/imported/SandTower.png-0d9fa01e019df89d37f87911e99f1331.ctex"]
 
 [params]
 

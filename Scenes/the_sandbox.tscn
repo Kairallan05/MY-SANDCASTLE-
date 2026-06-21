@@ -1,8 +1,9 @@
 [gd_scene format=4 uid="uid://sefblxb0ywnb"]
 
-[ext_resource type="Texture2D" uid="uid://38lgi8setnun" path="res://Assets/Background_Tiles/SandCastle.png" id="1_r8ph2"]
+[ext_resource type="Texture2D" uid="uid://38lgi8setnun" path="res://Assets/Background_Tiles/SandPit.png" id="1_r8ph2"]
 [ext_resource type="PackedScene" uid="uid://cwsejv5ait2vt" path="res://Scenes/Player.tscn" id="2_n2tfa"]
 [ext_resource type="PackedScene" uid="uid://cdm8ylx03a1me" path="res://Scenes/enemy.tscn" id="3_uuwa1"]
+[ext_resource type="PackedScene" uid="uid://boatk2b562mav" path="res://Scenes/sand_castle.tscn" id="4_hfgwn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n2tfa"]
 texture = ExtResource("1_r8ph2")
@@ -20,9 +21,14 @@ texture = ExtResource("1_r8ph2")
 sources/0 = SubResource("TileSetAtlasSource_n2tfa")
 
 [node name="The_Sandbox" type="Node2D" unique_id=1067879613]
+y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=422724015 instance=ExtResource("2_n2tfa")]
+y_sort_enabled = true
 position = Vector2(593, 339)
+
+[node name="SandCastle" parent="." unique_id=20124895 instance=ExtResource("4_hfgwn")]
+position = Vector2(598, 423)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2053472694]
 z_index = -1
