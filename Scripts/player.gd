@@ -7,8 +7,11 @@ extends CharacterBody2D
 @onready var melee_timer: Timer = $Arm/Melee_timer
 @onready var melee_col: Area2D = $Arm/Melee_Col
 
-var speed = 150.0
+@export var speed = 150.0
+@export var knockback = 30.0
+
 var attacking = false
+
 
 func _ready() -> void:
 	melee_sprite.play("Idle")
@@ -33,23 +36,21 @@ func _melee() -> void:
 	
 	if Input.is_action_pressed("attack") and !attacking:
 		attacking = true
+		melee_col.monitoring = true
+		melee_col.monitorable = true
 		melee_sprite.play("Attack")
 		melee_timer.start()
 
 func _on_melee_sprite_animation_finished() -> void:
 	melee_sprite.play("Idle")
+	melee_col.monitoring = false
+	melee_col.monitorable = false
 
 func _on_melee_timer_timeout() -> void:
 	attacking = false
 
 func _on_melee_col_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
-		print(body.hitable)
-		body.hitable = true
-		print(body.hitable)
-
-func _on_melee_col_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
-		print(body.hitable)
-		body.hitable = false
-		print(body.hitable)
+		body.impact.play()
+		body._knockback(knockback)
+		body.health -= 1.0

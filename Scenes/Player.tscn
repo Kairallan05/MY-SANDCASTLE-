@@ -149,6 +149,8 @@ offset = Vector2(0, -10)
 [node name="Melee_Col" type="Area2D" parent="Arm" unique_id=1850729426]
 collision_layer = 2
 collision_mask = 2
+monitoring = false
+monitorable = false
 
 [node name="Collider" type="CollisionShape2D" parent="Arm/Melee_Col" unique_id=541016050]
 position = Vector2(11, 0)
@@ -160,5 +162,4 @@ one_shot = true
 
 [connection signal="animation_finished" from="Arm/Melee_Sprite" to="." method="_on_melee_sprite_animation_finished"]
 [connection signal="body_entered" from="Arm/Melee_Col" to="." method="_on_melee_col_body_entered"]
-[connection signal="body_exited" from="Arm/Melee_Col" to="." method="_on_melee_col_body_exited"]
 [connection signal="timeout" from="Arm/Melee_timer" to="." method="_on_melee_timer_timeout"]

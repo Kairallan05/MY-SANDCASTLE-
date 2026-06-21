@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cdm8ylx03a1me"]
 
 [ext_resource type="Script" uid="uid://4dobfmbff6if" path="res://Scripts/enemy.gd" id="1_hghv2"]
+[ext_resource type="AudioStream" uid="uid://cd3iej3ther5a" path="res://Assets/Sound_Effects/Impact_noise.mp3" id="2_1f0kj"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yf5fn"]
 
@@ -19,3 +20,21 @@ texture = SubResource("CanvasTexture_yf5fn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105046199]
 shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Healthbar" type="ProgressBar" parent="." unique_id=1756947510]
+modulate = Color(0.86302406, 0, 0.2908519, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -11.0
+offset_right = 12.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 10.0
+value = 9.13
+show_percentage = false
+
+[node name="Impact" type="AudioStreamPlayer2D" parent="." unique_id=718267741]
+stream = ExtResource("2_1f0kj")
