@@ -10,15 +10,19 @@ class_name Enemy
 var health = 10.0
 var speed = 20.0
 var damage = 5.0
+var target
 
 func _ready() -> void:
 	healthbar.max_value = health
 
 func _physics_process(delta: float) -> void:
 	healthbar.value = health
-	
-	var direction = (sand_castle.global_position - global_position).normalized()
-	velocity = velocity.move_toward(direction * speed, delta * speed)
+	if (player.global_position - global_position).length() < 150.0:
+		target = player
+	else:
+		target = sand_castle
+	var direction = (target.global_position - global_position).normalized()
+	velocity = velocity.move_toward(direction * speed, delta * (speed * 5))
 	
 	if health <= 0.0:
 		queue_free()
