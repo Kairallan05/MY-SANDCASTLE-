@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://cwsejv5ait2vt"]
+
+[ext_resource type="Script" uid="uid://bven8of6uvwvt" path="res://Scripts/player.gd" id="1_rpqav"]
+[ext_resource type="Texture2D" uid="uid://cl65eoucio062" path="res://Assets/Player/Player_Sprites.png" id="2_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://bmikjcnnvk56c" path="res://Assets/Player/Melee_sprites.png" id="3_gntrk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dewec"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ixxa"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nn08x"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52ee3"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhhdu"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_megsn"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoq75"]
+atlas = ExtResource("2_kyqiw")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gntrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dewec")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ixxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nn08x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52ee3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhhdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_megsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoq75")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksbbd"]
+atlas = ExtResource("3_gntrk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glx4g"]
+atlas = ExtResource("3_gntrk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miouo"]
+atlas = ExtResource("3_gntrk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3h8g"]
+atlas = ExtResource("3_gntrk")
+region = Rect2(0, 0, 20, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksbbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glx4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miouo")
+}],
+"loop": 0,
+"name": &"Attack",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3h8g")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 6.0
+height = 18.0
+
+[node name="Player" type="CharacterBody2D" unique_id=422724015]
+script = ExtResource("1_rpqav")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=531702506]
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"Idle"
+frame_progress = 0.84333223
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=689912048]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1878227757]
+zoom = Vector2(5, 5)
+
+[node name="Arm" type="Node2D" parent="." unique_id=6031362]
+
+[node name="Melee_Sprite" type="AnimatedSprite2D" parent="Arm" unique_id=1021098886]
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"Attack"
+frame = 1
+frame_progress = 0.3043987
+offset = Vector2(0, -10)
+
+[node name="Melee_Col" type="Area2D" parent="Arm" unique_id=1850729426]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collider" type="CollisionShape2D" parent="Arm/Melee_Col" unique_id=541016050]
+position = Vector2(11, 0)
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Melee_timer" type="Timer" parent="Arm" unique_id=323007772]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="animation_finished" from="Arm/Melee_Sprite" to="." method="_on_melee_sprite_animation_finished"]
+[connection signal="body_entered" from="Arm/Melee_Col" to="." method="_on_melee_col_body_entered"]
+[connection signal="body_exited" from="Arm/Melee_Col" to="." method="_on_melee_col_body_exited"]
+[connection signal="timeout" from="Arm/Melee_timer" to="." method="_on_melee_timer_timeout"]
