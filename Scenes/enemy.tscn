@@ -38,3 +38,9 @@ show_percentage = false
 
 [node name="Impact" type="AudioStreamPlayer2D" parent="." unique_id=718267741]
 stream = ExtResource("2_1f0kj")
+
+[node name="Death_timer" type="Timer" parent="." unique_id=1589820839]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="Death_timer" to="." method="_on_death_timer_timeout"]

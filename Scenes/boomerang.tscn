@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cr6d3pkmf18km"]
+
+[ext_resource type="Texture2D" uid="uid://bmkx5s4k27688" path="res://Assets/Player/Boomerang.png" id="1_1kak0"]
+[ext_resource type="Script" uid="uid://ba7oysfv8o5u" path="res://Scripts/boomerang.gd" id="1_vesgf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+radius = 7.0
+
+[node name="Boomerang" type="Node2D" unique_id=1426956160]
+script = ExtResource("1_vesgf")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=386855420]
+rotation = 6.2831855
+collision_layer = 2
+collision_mask = 2
+
+[node name="Boomerang" type="Sprite2D" parent="Hitbox" unique_id=1963725396]
+visible = false
+position = Vector2(30, 0)
+texture = ExtResource("1_1kak0")
+
+[node name="Col" type="CollisionShape2D" parent="Hitbox" unique_id=1860018640]
+position = Vector2(30, 0)
+shape = SubResource("CircleShape2D_yf5fn")
+disabled = true
+
+[node name="Boomerang2" type="Sprite2D" parent="Hitbox" unique_id=1625837930]
+visible = false
+position = Vector2(-30, 0)
+rotation = 3.1415927
+texture = ExtResource("1_1kak0")
+
+[node name="Col2" type="CollisionShape2D" parent="Hitbox" unique_id=545925406]
+position = Vector2(-30, 0)
+shape = SubResource("CircleShape2D_yf5fn")
+disabled = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
