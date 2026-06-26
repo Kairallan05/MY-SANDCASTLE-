@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cchgvcm7tc7qj"]
+
+[ext_resource type="Script" uid="uid://57vyhk234aao" path="res://Scripts/prop_hat.gd" id="1_cf7sb"]
+[ext_resource type="Texture2D" uid="uid://dpe6jgjb1fvcp" path="res://Assets/Player/Prop_hat.png" id="2_vfcbv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0nef"]
+size = Vector2(10, 11)
+
+[node name="Prop_hat" type="Node2D" unique_id=1596960541]
+process_mode = 1
+script = ExtResource("1_cf7sb")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=41273299]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Col" type="CollisionShape2D" parent="Hitbox" unique_id=315188541]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_n0nef")
+
+[node name="Hat" type="Sprite2D" parent="." unique_id=848870123]
+position = Vector2(0, -1)
+texture = ExtResource("2_vfcbv")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

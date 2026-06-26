@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://b7suhcadeuhd0"]
+
+[ext_resource type="Script" uid="uid://beeiac4udr2tc" path="res://Scripts/stink.gd" id="1_pbp4h"]
+[ext_resource type="Texture2D" uid="uid://gvp6lcbqa8gw" path="res://Assets/Player/Stinky Aura.png" id="2_dx1kt"]
+[ext_resource type="AudioStream" uid="uid://d6j1h83pwi6b" path="res://Assets/Sound_Effects/dragon-studio-steam-hissing-386157.mp3" id="3_xpqvs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpqvs"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw125"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x6ex"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tspnv"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx1kt"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psyyg"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s810"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1tpj"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elgwx"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5cc1"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o21gj"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nwbf"]
+atlas = ExtResource("2_dx1kt")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpqvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw125")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x6ex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tspnv")
+}],
+"loop": 1,
+"name": &"Stage1",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx1kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psyyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s810")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1tpj")
+}],
+"loop": 1,
+"name": &"Stage2",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elgwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5cc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o21gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nwbf")
+}],
+"loop": 1,
+"name": &"Stage3",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 13.038404
+
+[node name="Stink" type="Node2D" unique_id=713761243]
+process_mode = 1
+script = ExtResource("1_pbp4h")
+
+[node name="Cloud" type="AnimatedSprite2D" parent="." unique_id=1747389073]
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"Stage3"
+frame_progress = 0.8583698
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=765388901]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Col" type="CollisionShape2D" parent="Hitbox" unique_id=2099665059]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Timer" type="Timer" parent="." unique_id=1206446171]
+
+[node name="Hiss" type="AudioStreamPlayer2D" parent="." unique_id=2118608690]
+stream = ExtResource("3_xpqvs")
+volume_db = -10.0
+pitch_scale = 3.0
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

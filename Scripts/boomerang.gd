@@ -21,6 +21,8 @@ func _process(delta: float) -> void:
 			_stage1()
 		2:
 			_stage2()
+		3:
+			_stage3()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
@@ -42,3 +44,16 @@ func _stage2():
 	boomerang.rotation += 0.1
 	boomerang_2.rotation += 0.1
 	rotation += 0.05
+
+func _stage3():
+	boomerang.texture = preload("uid://dipqvj58jb7ah")
+	boomerang_2.texture = preload("uid://dipqvj58jb7ah")
+	col.scale.x = 1.5
+	col.scale.y = 1.5
+	boomerang.visible = true
+	col.disabled = false
+	boomerang_2.visible = true
+	col_2.disabled = false
+	boomerang.rotation += 0.1
+	boomerang_2.rotation += 0.1
+	rotation += 0.075

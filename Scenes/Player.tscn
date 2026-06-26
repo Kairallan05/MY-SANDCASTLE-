@@ -3,10 +3,13 @@
 [ext_resource type="Script" uid="uid://bven8of6uvwvt" path="res://Scripts/player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://cl65eoucio062" path="res://Assets/Player/Player_Sprites.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://bmikjcnnvk56c" path="res://Assets/Player/Melee_sprites.png" id="3_gntrk"]
-[ext_resource type="Script" uid="uid://3w862njig5w6" path="res://Scenes/abilities.gd" id="4_5ixxa"]
+[ext_resource type="Script" uid="uid://3w862njig5w6" path="res://Scripts/abilities.gd" id="4_5ixxa"]
 [ext_resource type="PackedScene" uid="uid://cr6d3pkmf18km" path="res://Scenes/boomerang.tscn" id="4_dewec"]
+[ext_resource type="PackedScene" uid="uid://cchgvcm7tc7qj" path="res://Scenes/prop_hat.tscn" id="6_bhhdu"]
 [ext_resource type="Texture2D" uid="uid://dheyvpen2bq0m" path="res://Assets/Player/Ability Wheel.png" id="6_nn08x"]
 [ext_resource type="AudioStream" uid="uid://dqouopp1kahgu" path="res://Assets/Sound_Effects/dragon-studio-ding-402325.mp3" id="7_52ee3"]
+[ext_resource type="PackedScene" uid="uid://b7suhcadeuhd0" path="res://Scenes/stink.tscn" id="7_megsn"]
+[ext_resource type="PackedScene" uid="uid://bop23xojgc0h1" path="res://Scenes/balloons.tscn" id="8_yoq75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
 atlas = ExtResource("2_kyqiw")
@@ -225,7 +228,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Crumble",
-"speed": 3.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -282,6 +285,12 @@ script = ExtResource("4_5ixxa")
 [node name="Boomerang" parent="Abilities" unique_id=1426956160 instance=ExtResource("4_dewec")]
 process_mode = 1
 
+[node name="Prop_hat" parent="Abilities" unique_id=1596960541 instance=ExtResource("6_bhhdu")]
+
+[node name="Stink" parent="Abilities" unique_id=713761243 instance=ExtResource("7_megsn")]
+
+[node name="Balloons" parent="Abilities" unique_id=1993233371 instance=ExtResource("8_yoq75")]
+
 [node name="Wheel" type="AnimatedSprite2D" parent="." unique_id=1560083594]
 process_mode = 3
 visible = false
@@ -291,7 +300,7 @@ sprite_frames = SubResource("SpriteFrames_57qmd")
 animation = &"Crumble"
 
 [node name="Spin_timer" type="Timer" parent="Wheel" unique_id=683957714]
-wait_time = 5.0
+wait_time = 2.5
 one_shot = true
 
 [node name="Ding" type="AudioStreamPlayer2D" parent="Wheel" unique_id=1731179534]

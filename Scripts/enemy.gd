@@ -16,14 +16,12 @@ var dead
 
 func _ready() -> void:
 	healthbar.max_value = health
+	target = sand_castle
 	dead = false
 
 func _physics_process(delta: float) -> void:
 	healthbar.value = health
-	if (player.global_position - global_position).length() < 150.0:
-		target = player
-	else:
-		target = sand_castle
+
 	var direction = (target.global_position - global_position).normalized()
 	velocity = velocity.move_toward(direction * speed, delta * (speed * 5))
 	
