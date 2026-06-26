@@ -10,7 +10,7 @@ var damage : float
 
 func _ready() -> void:
 	knockback = 40
-	damage = 2.0
+	damage = 8.0
 	
 
 func _process(delta: float) -> void:
@@ -44,6 +44,8 @@ func _stage2():
 	boomerang.rotation += 0.1
 	boomerang_2.rotation += 0.1
 	rotation += 0.05
+	knockback = 50
+	damage = 3.0
 
 func _stage3():
 	boomerang.texture = preload("uid://dipqvj58jb7ah")
@@ -57,3 +59,5 @@ func _stage3():
 	boomerang.rotation += 0.1
 	boomerang_2.rotation += 0.1
 	rotation += 0.075
+	knockback = 75
+	damage = 5.0

@@ -3,20 +3,29 @@ extends Node2D
 @onready var boomerang: Ability = $Boomerang
 @onready var prop_hat: Ability = $Prop_hat
 @onready var stink: Ability = $Stink
-@onready var ding: AudioStreamPlayer2D = $"../Wheel/Ding"
+@onready var drone: Ability = $Drone
+@onready var ding: AudioStreamPlayer2D = $"../../CanvasLayer/Control2/Wheel/Ding"
 @onready var player: CharacterBody2D = $".."
-@onready var wheel: AnimatedSprite2D = $"../Wheel"
-@onready var spin_timer: Timer = $"../Wheel/Spin_timer"
-@onready var ability_array: Array[Ability] = [boomerang,prop_hat,stink]
+@onready var wheel: AnimatedSprite2D = $"../../CanvasLayer/Control2/Wheel"
+@onready var spin_timer: Timer = $"../../CanvasLayer/Control2/Wheel/Spin_timer"
+@onready var ability_array: Array[Ability] = [boomerang,prop_hat,stink,drone]
+@onready var spin_meter: ProgressBar = $"../../CanvasLayer/Control/Spin_meter"
+
+
 var paused = false
 var spinning = false
 var spin_speed = 0.02
 var max_speed = 0.2
+var spin = 0.0
 
 
 func _process(delta: float) -> void:
-	
-	if Input.is_action_just_pressed("Pause"):
+	spin_meter.value = spin
+	if spin >= 10.0:
+		spin = 10.0
+	else:
+		spin += 0.01
+	if Input.is_action_just_pressed("Pause") and spin == 10.0:
 		get_tree().paused = true
 		paused = true
 		wheel.visible = true
@@ -42,5 +51,6 @@ func _on_wheel_animation_finished() -> void:
 	get_tree().paused = false
 	paused = false
 	spinning = false
+	spin = 0.0
 	spin_speed = 0.04
 	ding.play()

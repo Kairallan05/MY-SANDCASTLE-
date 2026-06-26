@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dbkvn7x65txvs"]
+
+[ext_resource type="Script" uid="uid://1abf55wy7ybk" path="res://Scripts/drone.gd" id="1_ws5iu"]
+[ext_resource type="Texture2D" uid="uid://b3rymr2nnv080" path="res://Assets/Player/Drone.png" id="2_o36xs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 68.06615
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+
+[node name="Drone" type="Node2D" unique_id=1469324881]
+process_mode = 1
+script = ExtResource("1_ws5iu")
+
+[node name="Range" type="Area2D" parent="." unique_id=236413847]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Col" type="CollisionShape2D" parent="Range" unique_id=1746160886]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=276409604]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite" type="Sprite2D" parent="Hitbox" unique_id=1472549971]
+visible = false
+texture = ExtResource("2_o36xs")
+
+[node name="Hit" type="CollisionShape2D" parent="Hitbox" unique_id=2069724069]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_yf5fn")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

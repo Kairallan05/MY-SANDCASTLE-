@@ -6,9 +6,8 @@
 [ext_resource type="Script" uid="uid://3w862njig5w6" path="res://Scripts/abilities.gd" id="4_5ixxa"]
 [ext_resource type="PackedScene" uid="uid://cr6d3pkmf18km" path="res://Scenes/boomerang.tscn" id="4_dewec"]
 [ext_resource type="PackedScene" uid="uid://cchgvcm7tc7qj" path="res://Scenes/prop_hat.tscn" id="6_bhhdu"]
-[ext_resource type="Texture2D" uid="uid://dheyvpen2bq0m" path="res://Assets/Player/Ability Wheel.png" id="6_nn08x"]
-[ext_resource type="AudioStream" uid="uid://dqouopp1kahgu" path="res://Assets/Sound_Effects/dragon-studio-ding-402325.mp3" id="7_52ee3"]
 [ext_resource type="PackedScene" uid="uid://b7suhcadeuhd0" path="res://Scenes/stink.tscn" id="7_megsn"]
+[ext_resource type="PackedScene" uid="uid://dbkvn7x65txvs" path="res://Scenes/drone.tscn" id="8_yoq75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
 atlas = ExtResource("2_kyqiw")
@@ -127,118 +126,7 @@ animations = [{
 radius = 6.0
 height = 18.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1e7my"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(0, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_arntx"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(80, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lslt6"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(160, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ulo2v"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(240, 0, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1iu4k"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(0, 80, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m0x7a"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(80, 80, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5v66d"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(160, 80, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x63xi"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(240, 80, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i2e8t"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(0, 160, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qidb7"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(80, 160, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_70hv0"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(160, 160, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8flut"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(240, 160, 80, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_utwlt"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(304, 156, 16, 26)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u7x0b"]
-atlas = ExtResource("6_nn08x")
-region = Rect2(0, 0, 80, 80)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_57qmd"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1e7my")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_arntx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lslt6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ulo2v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1iu4k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m0x7a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5v66d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x63xi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i2e8t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qidb7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_70hv0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8flut")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_utwlt")
-}],
-"loop": 0,
-"name": &"Crumble",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u7x0b")
-}],
-"loop": 1,
-"name": &"Idle",
-"speed": 5.0
-}]
-
-[node name="Player" type="CharacterBody2D" unique_id=422724015]
+[node name="Player" type="CharacterBody2D" unique_id=422724015 groups=["Player"]]
 script = ExtResource("1_rpqav")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=531702506]
@@ -251,7 +139,12 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1878227757]
+position = Vector2(11, 0)
 zoom = Vector2(5, 5)
+limit_left = 309
+limit_top = 117
+limit_right = 875
+limit_bottom = 555
 
 [node name="Arm" type="Node2D" parent="." unique_id=6031362]
 
@@ -288,26 +181,10 @@ process_mode = 1
 
 [node name="Stink" parent="Abilities" unique_id=713761243 instance=ExtResource("7_megsn")]
 
-[node name="Wheel" type="AnimatedSprite2D" parent="." unique_id=1560083594]
-process_mode = 3
-visible = false
-z_index = 2
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_57qmd")
-animation = &"Crumble"
-
-[node name="Spin_timer" type="Timer" parent="Wheel" unique_id=683957714]
-wait_time = 2.5
-one_shot = true
-
-[node name="Ding" type="AudioStreamPlayer2D" parent="Wheel" unique_id=1731179534]
-stream = ExtResource("7_52ee3")
-volume_db = 5.0
+[node name="Drone" parent="Abilities" unique_id=1469324881 instance=ExtResource("8_yoq75")]
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=1766639782]
 
 [connection signal="animation_finished" from="Arm/Melee_Sprite" to="." method="_on_melee_sprite_animation_finished"]
 [connection signal="body_entered" from="Arm/Melee_Col" to="." method="_on_melee_col_body_entered"]
 [connection signal="timeout" from="Arm/Melee_timer" to="." method="_on_melee_timer_timeout"]
-[connection signal="animation_finished" from="Wheel" to="Abilities" method="_on_wheel_animation_finished"]
-[connection signal="timeout" from="Wheel/Spin_timer" to="Abilities" method="_on_spin_timer_timeout"]
