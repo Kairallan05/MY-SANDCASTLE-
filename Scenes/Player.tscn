@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dheyvpen2bq0m" path="res://Assets/Player/Ability Wheel.png" id="6_nn08x"]
 [ext_resource type="AudioStream" uid="uid://dqouopp1kahgu" path="res://Assets/Sound_Effects/dragon-studio-ding-402325.mp3" id="7_52ee3"]
 [ext_resource type="PackedScene" uid="uid://b7suhcadeuhd0" path="res://Scenes/stink.tscn" id="7_megsn"]
-[ext_resource type="PackedScene" uid="uid://bop23xojgc0h1" path="res://Scenes/balloons.tscn" id="8_yoq75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
 atlas = ExtResource("2_kyqiw")
@@ -289,8 +288,6 @@ process_mode = 1
 
 [node name="Stink" parent="Abilities" unique_id=713761243 instance=ExtResource("7_megsn")]
 
-[node name="Balloons" parent="Abilities" unique_id=1993233371 instance=ExtResource("8_yoq75")]
-
 [node name="Wheel" type="AnimatedSprite2D" parent="." unique_id=1560083594]
 process_mode = 3
 visible = false
@@ -306,6 +303,8 @@ one_shot = true
 [node name="Ding" type="AudioStreamPlayer2D" parent="Wheel" unique_id=1731179534]
 stream = ExtResource("7_52ee3")
 volume_db = 5.0
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=1766639782]
 
 [connection signal="animation_finished" from="Arm/Melee_Sprite" to="." method="_on_melee_sprite_animation_finished"]
 [connection signal="body_entered" from="Arm/Melee_Col" to="." method="_on_melee_col_body_entered"]

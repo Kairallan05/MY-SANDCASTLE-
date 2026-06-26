@@ -5,6 +5,7 @@ var LOON = preload("uid://qo6s3x20p10l").instantiate()
 @onready var col: CollisionShape2D = $Range/Col
 @onready var Hit_array: Array[CharacterBody2D]
 @onready var timer: Timer = $Timer
+@onready var projectiles: Node2D = $"../../Projectiles"
 
 var count
 var time
@@ -15,6 +16,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	time = delta
+	for enemy in Hit_array:
+		if !is_instance_valid(enemy):
+			Hit_array.erase(enemy)
 	match stage:
 		0:
 			pass
@@ -47,9 +51,8 @@ func _on_range_body_entered(body: Node2D) -> void:
 func _on_timer_timeout() -> void:
 	if !Hit_array.is_empty():
 		if stage == 1:
-			var bloon = LOON.instantiate()
-			bloon.global_position = global_position
+			var bloon = LOON
 			var target = Hit_array.pick_random()
-			
-			bloon.global_position = bloon.global_position.move_toward(target.global_position,time * 4)
-			print("poop2")
+			bloon.target = target
+			projectiles.add_child(bloon)
+			bloon.global_position = global_position

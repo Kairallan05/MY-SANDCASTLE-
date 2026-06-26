@@ -3,12 +3,11 @@ extends Node2D
 @onready var boomerang: Ability = $Boomerang
 @onready var prop_hat: Ability = $Prop_hat
 @onready var stink: Ability = $Stink
-@onready var balloons: Ability = $Balloons
 @onready var ding: AudioStreamPlayer2D = $"../Wheel/Ding"
 @onready var player: CharacterBody2D = $".."
 @onready var wheel: AnimatedSprite2D = $"../Wheel"
 @onready var spin_timer: Timer = $"../Wheel/Spin_timer"
-@onready var ability_array: Array[Ability] = [boomerang,prop_hat,stink,balloons]
+@onready var ability_array: Array[Ability] = [boomerang,prop_hat,stink]
 var paused = false
 var spinning = false
 var spin_speed = 0.02
@@ -26,7 +25,7 @@ func _process(delta: float) -> void:
 		spinning = true
 		spin_timer.start()
 		var random = ability_array.pick_random()
-		balloons._level()
+		random._level()
 		if random.stage == 3:
 			ability_array.erase(random)
 	
