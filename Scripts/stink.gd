@@ -37,16 +37,24 @@ func _stage1():
 	col.scale = Vector2(0.6,0.6)
 	col.disabled = false
 	cloud.visible = true
-	damage = 1.0
+	damage = 10.0
+	Tutor_string = "PFFTT... you stink, 
+	poison damage aura? ... 
+	perfect"
 
 func _stage2():
 	cloud.play("Stage2")
 	col.scale = Vector2(1.0,1.0)
-	damage = 2.0
+	damage = 15.0
+	Tutor_string = "Do you play League? 
+	other people use this sand pit you know"
 func _stage3():
 	cloud.play("Stage3")
 	col.scale = Vector2(1.8,1.8)
-	damage = 4.0
+	damage = 20.0
+	Tutor_string = "Your smell has become so foul
+	you now exude brown...
+	please have a shower"
 
 
 func _on_timer_timeout() -> void:

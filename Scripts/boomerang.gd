@@ -7,7 +7,6 @@ extends Ability
 
 var knockback : float
 var damage : float
-
 func _ready() -> void:
 	knockback = 40
 	damage = 8.0
@@ -26,6 +25,8 @@ func _process(delta: float) -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
+		var sound = randf_range(0.5,1.5)
+		body.impact.pitch_scale = sound
 		body.impact.play()
 		body._knockback(knockback)
 		body.health -= damage
@@ -35,6 +36,9 @@ func _stage1():
 	col.disabled = false
 	boomerang.rotation += 0.1
 	rotation += 0.05
+	Tutor_string = "Usually boomerangs come back, 
+	This one though... Spins forever 
+	(to win of course)"
 
 func _stage2():
 	boomerang.visible = true
@@ -45,7 +49,10 @@ func _stage2():
 	boomerang_2.rotation += 0.1
 	rotation += 0.05
 	knockback = 50
-	damage = 3.0
+	damage = 15.0
+	Tutor_string = "whats better than 1 boomerang... 
+	3 BOOMERANGS... 
+	you can get 2 though"
 
 func _stage3():
 	boomerang.texture = preload("uid://dipqvj58jb7ah")
@@ -59,5 +66,7 @@ func _stage3():
 	boomerang.rotation += 0.1
 	boomerang_2.rotation += 0.1
 	rotation += 0.075
-	knockback = 75
-	damage = 5.0
+	knockback = 100
+	damage = 30.0
+	Tutor_string = "I dont think this shape of boomerang should work, 
+	it'd definitely hurt to get hit by though"

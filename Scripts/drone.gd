@@ -15,7 +15,7 @@ var target : CharacterBody2D
 func _ready() -> void:
 	col.disabled = true
 	hit.disabled = true
-	damage = 2.0
+	damage = 10.0
 
 func _process(delta: float) -> void:
 	match stage:
@@ -32,7 +32,9 @@ func _stage1(delta):
 	sprite.visible = true
 	col.disabled = false
 	hit.disabled = false
-
+	Tutor_string = "SUPER ADVANCED TARGETING DRONE... 
+	just get close to an enemy, 
+	this will finish the job"
 	for i in range(Hit_array.size() - 1, -1, -1):
 		if !is_instance_valid(Hit_array[i]):
 			Hit_array.remove_at(i)
@@ -49,10 +51,12 @@ func _stage1(delta):
 		delta * 40
 	)
 
+
 func _stage2(delta):
 	range.scale = Vector2(1.5, 1.5)
-	damage = 3.0
-
+	damage = 15.0
+	Tutor_string = "The drone can see further 
+	and hits harder"
 	for i in range(Hit_array.size() - 1, -1, -1):
 		if !is_instance_valid(Hit_array[i]):
 			Hit_array.remove_at(i)
@@ -69,10 +73,13 @@ func _stage2(delta):
 		delta * 80
 	)
 
+
 func _stage3(delta):
 	range.scale = Vector2(2.0, 2.0)
-	damage = 5.0
-
+	damage = 30.0
+	Tutor_string = "Even bigger range, 
+	even better damage... 
+	i swear"
 	for i in range(Hit_array.size() - 1, -1, -1):
 		if !is_instance_valid(Hit_array[i]):
 			Hit_array.remove_at(i)
@@ -89,6 +96,7 @@ func _stage3(delta):
 		delta * 120
 	)
 
+
 func _on_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
 		Hit_array.append(body)
@@ -101,6 +109,8 @@ func _on_range_body_exited(body: Node2D) -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
+		var sound = randf_range(0.5,1.5)
+		body.impact.pitch_scale = sound
 		body.impact.play()
 		body.health -= damage
 		target = player

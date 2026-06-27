@@ -1,11 +1,15 @@
 [gd_scene format=4 uid="uid://sefblxb0ywnb"]
 
+[ext_resource type="Script" uid="uid://b53x07ulg68l3" path="res://Scripts/canvas_layer.gd" id="1_04u17"]
 [ext_resource type="Texture2D" uid="uid://dheyvpen2bq0m" path="res://Assets/Player/Ability Wheel.png" id="1_anv8m"]
 [ext_resource type="Texture2D" uid="uid://38lgi8setnun" path="res://Assets/Background_Tiles/SandPit.png" id="1_r8ph2"]
 [ext_resource type="AudioStream" uid="uid://dqouopp1kahgu" path="res://Assets/Sound_Effects/dragon-studio-ding-402325.mp3" id="2_1smtv"]
 [ext_resource type="PackedScene" uid="uid://cwsejv5ait2vt" path="res://Scenes/Player.tscn" id="2_n2tfa"]
 [ext_resource type="PackedScene" uid="uid://boatk2b562mav" path="res://Scenes/sand_castle.tscn" id="4_hfgwn"]
+[ext_resource type="AudioStream" uid="uid://cuved6mwd2rhq" path="res://Assets/Sound_Effects/Spin Wheel.mp3" id="4_nbnnm"]
 [ext_resource type="Script" uid="uid://c6xmgrf3nb0fw" path="res://Scripts/enemy_container.gd" id="6_1smtv"]
+[ext_resource type="AudioStream" uid="uid://dld0m0okhedkp" path="res://Assets/Sound_Effects/Ambient Piano.mp3" id="7_kekw2"]
+[ext_resource type="AudioStream" uid="uid://cxeed8mlkuys4" path="res://Assets/Sound_Effects/GameBeat1.mp3" id="7_q6gpa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1e7my"]
 atlas = ExtResource("1_anv8m")
@@ -118,6 +122,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_1smtv"]
+font_size = 48
+outline_size = 27
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 43
+shadow_color = Color(0, 0, 0, 0.25490198)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yf5fn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q6gpa"]
+font_size = 32
+outline_size = 27
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 43
+shadow_color = Color(0, 0, 0, 0.25490198)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n2tfa"]
 texture = ExtResource("1_r8ph2")
 0:0/0 = 0
@@ -137,22 +157,32 @@ sources/0 = SubResource("TileSetAtlasSource_n2tfa")
 y_sort_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2130831520]
+script = ExtResource("1_04u17")
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1937906341]
 layout_mode = 3
-anchors_preset = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
+anchor_bottom = 0.5
 offset_left = -40.0
-offset_bottom = 40.0
+offset_top = -20.0
+offset_bottom = 20.0
 grow_horizontal = 0
+grow_vertical = 2
 
 [node name="Spin_meter" type="ProgressBar" parent="CanvasLayer/Control" unique_id=1486518726]
-layout_mode = 0
-offset_left = -205.0
-offset_top = 69.0
-offset_right = 10.0
-offset_bottom = 1309.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.975
+anchor_top = -8.15
+anchor_right = 0.975
+anchor_bottom = -8.15
+offset_left = -104.0
+offset_top = -154.0
+offset_right = -4.0
+offset_bottom = 846.0
 max_value = 10.0
 fill_mode = 3
 metadata/_edit_use_anchors_ = true
@@ -175,7 +205,7 @@ grow_vertical = 2
 process_mode = 3
 visible = false
 z_index = 2
-scale = Vector2(3, 3)
+scale = Vector2(9, 9)
 sprite_frames = SubResource("SpriteFrames_q6gpa")
 animation = &"Crumble"
 
@@ -189,11 +219,129 @@ process_mode = 3
 stream = ExtResource("2_1smtv")
 volume_db = 5.0
 
+[node name="Click" type="AudioStreamPlayer2D" parent="CanvasLayer/Control2/Wheel" unique_id=211434049]
+stream = ExtResource("4_nbnnm")
+parameters/looping = true
+
+[node name="Control3" type="Control" parent="CanvasLayer" unique_id=1528591464]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score" type="Label" parent="CanvasLayer/Control3" unique_id=376348238]
+layout_mode = 0
+offset_left = 11.0
+offset_right = 311.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 50
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_1smtv")
+
+[node name="Control4" type="Control" parent="CanvasLayer" unique_id=407487040]
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Spin" type="Label" parent="CanvasLayer/Control4" unique_id=746905772]
+layout_mode = 0
+offset_left = -243.0
+offset_right = 246.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+text = "press \"Space\" to Spin"
+label_settings = SubResource("LabelSettings_1smtv")
+
+[node name="Control5" type="Control" parent="CanvasLayer" unique_id=1433784304]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control5" unique_id=760352392]
+z_index = 3
+layout_mode = 0
+offset_left = -459.0
+offset_top = -137.0
+offset_right = 464.755
+offset_bottom = 159.57501
+
+[node name="Lose_screen" type="Label" parent="CanvasLayer/Control5/PanelContainer" unique_id=734213296]
+layout_mode = 2
+text = "You have let them destroy your castle...
+this isn't the end...
+Rebuild,Repair, and fight again
+\"ESC\" to play again"
+label_settings = SubResource("LabelSettings_1smtv")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control5" unique_id=835641002]
+modulate = Color(0.19370443, 0, 0.011805438, 0.81960785)
+position = Vector2(29.5, 14.5)
+scale = Vector2(2639, 1498.9999)
+texture = SubResource("CanvasTexture_yf5fn")
+
+[node name="Control6" type="Control" parent="CanvasLayer" unique_id=1602763754]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control6" unique_id=1489987373]
+z_index = 3
+layout_mode = 0
+offset_left = -320.0
+offset_top = -183.0
+offset_right = 269.055
+offset_bottom = 9.434998
+
+[node name="Tutor" type="Label" parent="CanvasLayer/Control6/PanelContainer" unique_id=45488936]
+layout_mode = 2
+text = "\"Left click to attack\"
+ for now"
+label_settings = SubResource("LabelSettings_q6gpa")
+horizontal_alignment = 1
+
 [node name="Player" parent="." unique_id=422724015 instance=ExtResource("2_n2tfa")]
 y_sort_enabled = true
 position = Vector2(593, 339)
 
+[node name="Music" type="AudioStreamPlayer2D" parent="Player" unique_id=1900541537]
+process_mode = 3
+position = Vector2(2, -5)
+stream = ExtResource("7_q6gpa")
+autoplay = true
+parameters/looping = true
+
+[node name="Deathmusic" type="AudioStreamPlayer2D" parent="Player" unique_id=1416935238]
+process_mode = 3
+stream = ExtResource("7_kekw2")
+volume_db = -5.0
+parameters/looping = true
+
 [node name="SandCastle" parent="." unique_id=20124895 instance=ExtResource("4_hfgwn")]
+process_mode = 3
 position = Vector2(596, 351)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2053472694]
@@ -205,7 +353,7 @@ tile_set = SubResource("TileSet_g4v7s")
 script = ExtResource("6_1smtv")
 
 [node name="Spawn_timer" type="Timer" parent="." unique_id=2117141709]
-wait_time = 5.0
+wait_time = 4.0
 
 [connection signal="animation_finished" from="CanvasLayer/Control2/Wheel" to="Player/Abilities" method="_on_wheel_animation_finished"]
 [connection signal="timeout" from="CanvasLayer/Control2/Wheel/Spin_timer" to="Player/Abilities" method="_on_spin_timer_timeout"]

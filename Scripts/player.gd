@@ -6,17 +6,22 @@ extends CharacterBody2D
 @onready var melee_sprite: AnimatedSprite2D = $Arm/Melee_Sprite
 @onready var melee_timer: Timer = $Arm/Melee_timer
 @onready var melee_col: Area2D = $Arm/Melee_Col
+@onready var score: Label = $"../CanvasLayer/Control3/Score"
+@onready var dirt: AudioStreamPlayer2D = $Dirt
+@onready var camzoomtimer: Timer = $Camzoomtimer
 
 @export var speed = 100.0
 @export var knockback = 30.0
 
 var attacking = false
-
+var Score = 0
 
 func _ready() -> void:
 	melee_sprite.play("Idle")
 
 func _physics_process(delta: float) -> void:
+	score.text = "Score: " + str(Score)
+	
 	var direction = Input.get_vector("Left","Right","Up","Down")
 	velocity = direction * speed
 	
@@ -24,8 +29,12 @@ func _physics_process(delta: float) -> void:
 	
 	if direction:
 		sprite.play("Walk")
+		if !dirt.playing:
+			dirt.play()
 	else:
 		sprite.play("Idle")
+		if dirt.playing:
+			dirt.stop()
 	
 	_melee()
 	
@@ -51,6 +60,8 @@ func _on_melee_timer_timeout() -> void:
 
 func _on_melee_col_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
+		var sound = randf_range(0.5,1.5)
+		body.impact.pitch_scale = sound
 		body.impact.play()
 		body._knockback(knockback)
-		body.health -= 1.0
+		body.health -= 5.0

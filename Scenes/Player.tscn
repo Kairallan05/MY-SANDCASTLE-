@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://bven8of6uvwvt" path="res://Scripts/player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://cl65eoucio062" path="res://Assets/Player/Player_Sprites.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://bmikjcnnvk56c" path="res://Assets/Player/Melee_sprites.png" id="3_gntrk"]
+[ext_resource type="Script" uid="uid://dq6twd5wf4fy" path="res://Scripts/camera.gd" id="3_yoq75"]
 [ext_resource type="Script" uid="uid://3w862njig5w6" path="res://Scripts/abilities.gd" id="4_5ixxa"]
 [ext_resource type="PackedScene" uid="uid://cr6d3pkmf18km" path="res://Scenes/boomerang.tscn" id="4_dewec"]
 [ext_resource type="PackedScene" uid="uid://cchgvcm7tc7qj" path="res://Scenes/prop_hat.tscn" id="6_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://b7suhcadeuhd0" path="res://Scenes/stink.tscn" id="7_megsn"]
 [ext_resource type="PackedScene" uid="uid://dbkvn7x65txvs" path="res://Scenes/drone.tscn" id="8_yoq75"]
+[ext_resource type="AudioStream" uid="uid://by2xpcwwb7mw1" path="res://Assets/Sound_Effects/Dirt_run.mp3" id="9_megsn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
 atlas = ExtResource("2_kyqiw")
@@ -139,12 +141,14 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1878227757]
+process_mode = 3
 position = Vector2(11, 0)
 zoom = Vector2(5, 5)
 limit_left = 309
 limit_top = 117
 limit_right = 875
 limit_bottom = 555
+script = ExtResource("3_yoq75")
 
 [node name="Arm" type="Node2D" parent="." unique_id=6031362]
 
@@ -185,6 +189,17 @@ process_mode = 1
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=1766639782]
 
+[node name="Dirt" type="AudioStreamPlayer2D" parent="." unique_id=1579659372]
+stream = ExtResource("9_megsn")
+volume_db = 10.0
+parameters/looping = true
+
+[node name="Camzoomtimer" type="Timer" parent="." unique_id=901526804]
+process_mode = 3
+wait_time = 0.429
+autostart = true
+
 [connection signal="animation_finished" from="Arm/Melee_Sprite" to="." method="_on_melee_sprite_animation_finished"]
 [connection signal="body_entered" from="Arm/Melee_Col" to="." method="_on_melee_col_body_entered"]
 [connection signal="timeout" from="Arm/Melee_timer" to="." method="_on_melee_timer_timeout"]
+[connection signal="timeout" from="Camzoomtimer" to="Camera" method="_on_camzoomtimer_timeout"]

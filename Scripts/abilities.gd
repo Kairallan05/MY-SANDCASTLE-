@@ -10,6 +10,10 @@ extends Node2D
 @onready var spin_timer: Timer = $"../../CanvasLayer/Control2/Wheel/Spin_timer"
 @onready var ability_array: Array[Ability] = [boomerang,prop_hat,stink,drone]
 @onready var spin_meter: ProgressBar = $"../../CanvasLayer/Control/Spin_meter"
+@onready var control_4: Control = $"../../CanvasLayer/Control4"
+@onready var tutor: Label = $"../../CanvasLayer/Control6/PanelContainer/Tutor"
+@onready var click: AudioStreamPlayer2D = $"../../CanvasLayer/Control2/Wheel/Click"
+
 
 
 var paused = false
@@ -17,30 +21,40 @@ var spinning = false
 var spin_speed = 0.02
 var max_speed = 0.2
 var spin = 0.0
+var spin_value = 10.0
+var random : Ability
 
 
 func _process(delta: float) -> void:
+	if ability_array.is_empty():
+		spin = 0.0
+		
 	spin_meter.value = spin
-	if spin >= 10.0:
-		spin = 10.0
-	else:
-		spin += 0.01
-	if Input.is_action_just_pressed("Pause") and spin == 10.0:
+	spin_meter.max_value = spin_value
+	if spin >= spin_value:
+		spin = spin_value
+	
+	if spin == spin_value:
 		get_tree().paused = true
 		paused = true
 		wheel.visible = true
 		wheel.play("Idle")
-	if Input.is_action_just_pressed("Spin") and paused:
+		control_4.visible = true
+	if Input.is_action_just_pressed("Spin") and paused and !spinning:
 		spinning = true
+		click.play()
 		spin_timer.start()
-		var random = ability_array.pick_random()
-		random._level()
+		random = ability_array.pick_random()
+		prop_hat._level()
 		if random.stage == 3:
 			ability_array.erase(random)
+		spin_value += (spin_value * 0.5)
 	
 	if spinning:
 		spin_speed = move_toward(spin_speed,max_speed,delta * spin_speed)
 		wheel.rotation += spin_speed
+	if random != null:
+		tutor.text = random.Tutor_string
 
 
 func _on_spin_timer_timeout() -> void:
@@ -48,9 +62,11 @@ func _on_spin_timer_timeout() -> void:
 
 
 func _on_wheel_animation_finished() -> void:
+	click.stop()
 	get_tree().paused = false
 	paused = false
 	spinning = false
 	spin = 0.0
 	spin_speed = 0.04
 	ding.play()
+	control_4.visible = false
