@@ -4,6 +4,7 @@ extends Area2D
 @onready var control_5: Control = $"../CanvasLayer/Control5"
 @onready var music: AudioStreamPlayer2D = $"../Player/Music"
 @onready var deathmusic: AudioStreamPlayer2D = $"../Player/Deathmusic"
+@onready var hit: AudioStreamPlayer2D = $Hit
 
 var Castle_Health = 100.0
 
@@ -25,5 +26,5 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
 		Castle_Health -= body.damage
-		print(Castle_Health)
+		hit.play()
 		body.queue_free()

@@ -327,6 +327,9 @@ horizontal_alignment = 1
 y_sort_enabled = true
 position = Vector2(593, 339)
 
+[node name="Camera" parent="Player" index="2" unique_id=1878227757]
+zoom = Vector2(4, 4)
+
 [node name="Music" type="AudioStreamPlayer2D" parent="Player" unique_id=1900541537]
 process_mode = 3
 position = Vector2(2, -5)

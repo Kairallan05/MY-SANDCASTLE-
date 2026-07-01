@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 		click.play()
 		spin_timer.start()
 		random = ability_array.pick_random()
-		prop_hat._level()
+		random._level()
 		if random.stage == 3:
 			ability_array.erase(random)
 		spin_value += (spin_value * 0.5)

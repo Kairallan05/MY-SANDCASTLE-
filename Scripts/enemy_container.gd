@@ -23,7 +23,6 @@ func _on_spawn_timer_timeout() -> void:
 	Score = health + speed
 	new_enemy.score = Score
 	add_child(new_enemy)
-	print("spawned")
 	new_enemy.global_position = Vector2(x, y)
 	if spawn_timer.wait_time > 3.0:
 		spawn_timer.wait_time -= 0.2

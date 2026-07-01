@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bqtq86slfig5l" path="res://Scripts/sand_castle.gd" id="1_hvyme"]
 [ext_resource type="Texture2D" uid="uid://bvkt7vmbmevty" path="res://Assets/Background_Tiles/SandCastle.png" id="1_mxf7w"]
 [ext_resource type="Texture2D" uid="uid://bpn2ifk5gbf04" path="res://Assets/Background_Tiles/SandTower.png" id="2_hvyme"]
+[ext_resource type="AudioStream" uid="uid://cntfussfcr43a" path="res://Assets/Sound_Effects/SandHit.mp3" id="4_6qnd2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
 radius = 27.0
@@ -73,5 +74,8 @@ offset_top = 22.0
 offset_right = 46.0
 offset_bottom = 35.0
 show_percentage = false
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="." unique_id=1640133822]
+stream = ExtResource("4_6qnd2")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
